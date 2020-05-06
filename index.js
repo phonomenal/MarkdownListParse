@@ -19,12 +19,19 @@ var rootChildren = root.childNodes;
 
 var jsonString = "";
 
+var headerJson = {};  
+headerJson.children=[];
+
 for(i = 0; i < rootChildren.length; i++)
 {
-  if (rootChildren[i].tagName == "h4")
+
+  if (rootChildren[i].tagName == "h4" || rootChildren[i].tagName == "h3")
   {
-  jsonString+= "Label: " + rootChildren[i].innerHTML;
+    jsonString+= "\n Label: " + rootChildren[i].innerHTML; 
+    itemNum = i.toString();
+    headerJson['label'] = rootChildren[i].innerHTML;
   }
+  //Parse through items inside <ol> tag
   else if(rootChildren[i].tagName == "ol")
   {
     for(j = 0; j < rootChildren[i].childNodes.length; j++)
@@ -32,9 +39,15 @@ for(i = 0; i < rootChildren.length; i++)
       if(rootChildren[i].childNodes[j].tagName == "li")
       {
         jsonString += "\n" + rootChildren[i].childNodes[j].innerHTML;
+
+        headerJson.children.push({item: rootChildren[i].childNodes[j].innerHTML})
     
       }
     }
 
   }  
 }
+
+var jsonCompiled = JSON.stringify(headerJson);
+
+console.log(jsonCompiled);
