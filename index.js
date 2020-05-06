@@ -17,6 +17,13 @@ const root = HTMLParser.parse(result);
 
 var rootChildren = root.childNodes;
 
+//Splice out any parsed whitespace
+for (var i = rootChildren.length - 1; i >= 0; --i) {
+    if (rootChildren[i].isWhitespace == true) {
+        rootChildren.splice(i,1);
+    }
+}
+
 var jsonString = "";
 
 var headerJson = {};  
