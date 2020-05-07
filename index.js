@@ -4,7 +4,8 @@ const HTMLParser = require('node-html-parser');
 
 const fs = require('fs');
 
-var headerList = ['h2', 'h3', 'h4'];
+var headerTypes = ['h2', 'h3', 'h4'];
+var listTypes = ['ol', 'ul'];
 
 try {
     var readMe = fs.readFileSync('demo.md', 'utf8')
@@ -37,14 +38,14 @@ for(i = 0; i < rootChildren.length; i++)
 {
   var tagName = rootChildren[i].tagName;
 
-  //If tag is within our headerlist
-  if (headerList.indexOf(tagName) >=0)
+  //If tag is within our headerTypes
+  if (headerTypes.indexOf(tagName) >=0)
   {
     itemNum = i.toString();
     headerJson['label'] = rootChildren[i].innerHTML;
   }
   //Parse through items inside <ol> tag
-  else if(headerList.indexOf(tagName) != 0 && rootChildren[i].tagName == "ol")
+  else if(headerTypes.indexOf(tagName) != 0 && listTypes.indexOf(tagName) >= 0)
   {
     var childList = rootChildren[i].childNodes;
 
