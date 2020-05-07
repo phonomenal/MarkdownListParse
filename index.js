@@ -27,7 +27,6 @@ for (var i = rootChildren.length - 1; i >= 0; --i) {
     }
 }
 
-var jsonString = "";
 
 var itemList = [];
 
@@ -41,7 +40,6 @@ for(i = 0; i < rootChildren.length; i++)
   //If tag is within our headerlist
   if (headerList.indexOf(tagName) >=0)
   {
-    jsonString+= "\n Label: " + rootChildren[i].innerHTML; 
     itemNum = i.toString();
     headerJson['label'] = rootChildren[i].innerHTML;
   }
@@ -54,9 +52,8 @@ for(i = 0; i < rootChildren.length; i++)
     {
       if(childList[j].tagName == "li")
       {
-        jsonString += "\n" + childList[j].innerHTML;
 
-        headerJson.children.push({item: rootChildren[i].childNodes[j].innerHTML})
+        headerJson.children.push({item: rootChildren[i].childNodes[j].structuredText})
     
       }
       else if(j == childList.length - 1)
@@ -75,4 +72,15 @@ for(i = 0; i < rootChildren.length; i++)
 
 console.log("MarkDown Parsing Finished...");
 //Markdown Items placed into list of objects
-console.log("Number of Headers Parsed: " + itemList.length);
+console.log("Number of Headers Parsed: " + itemList.length);6
+
+for(i = 0; i < itemList.length; i++)
+{
+  console.log(itemList[i].label);
+
+  for (j= 0; j < itemList[i].children.length; j++)
+  {
+    console.log("   " + itemList[i].children[j].item)
+
+  }
+}
