@@ -2,6 +2,8 @@ var HTMLParser = require('node-html-parser');
 
 const fs = require('fs');
 
+var headerList = ['h2', 'h3', 'h4'];
+
 try {
     var readMe = fs.readFileSync('demo.md', 'utf8')
     console.log(data)
@@ -26,11 +28,14 @@ for (var i = rootChildren.length - 1; i >= 0; --i) {
 
 var jsonString = "";
 
+var itemList = [];
+
 var headerJson = {};  
 headerJson.children=[];
 
 for(i = 0; i < rootChildren.length; i++)
 {
+  var tagName = rootChildren[i].tagName;
 
   if (rootChildren[i].tagName == "h4" || rootChildren[i].tagName == "h3")
   {
@@ -39,22 +44,32 @@ for(i = 0; i < rootChildren.length; i++)
     headerJson['label'] = rootChildren[i].innerHTML;
   }
   //Parse through items inside <ol> tag
-  else if(rootChildren[i].tagName == "ol")
+  else if(headerList.indexOf(tagName) != 0 && rootChildren[i].tagName == "ol")
   {
+    var childList = rootChildren[i].childNodes;
+
     for(j = 0; j < rootChildren[i].childNodes.length; j++)
     {
-      if(rootChildren[i].childNodes[j].tagName == "li")
+      if(childList[j].tagName == "li")
       {
-        jsonString += "\n" + rootChildren[i].childNodes[j].innerHTML;
+        jsonString += "\n" + childList[j].innerHTML;
 
         headerJson.children.push({item: rootChildren[i].childNodes[j].innerHTML})
     
       }
-    }
+      else if(j == childList.length - 1)
+      {
+          //Push current header and list items
+          itemList.push(headerJson);
 
-  }  
+          //Clear object for next section
+          headerJson = {};
+          headerJson.children=[];
+
+      }
+    }
+  }
 }
 
-var jsonCompiled = JSON.stringify(headerJson);
-
-console.log(jsonCompiled);
+//Markdown Items placed into list of objects
+console.log(itemList);
