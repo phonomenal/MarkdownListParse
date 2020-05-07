@@ -7,4 +7,7 @@
 ### B. CI
 1. What are the languages that are supported?
 2. How are build plans defined?
+
+
+
 3. How are resources for builds divided?

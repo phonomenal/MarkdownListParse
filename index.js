@@ -1,4 +1,6 @@
-var HTMLParser = require('node-html-parser');
+#! /usr/bin/env node
+
+const HTMLParser = require('node-html-parser');
 
 const fs = require('fs');
 
@@ -6,7 +8,6 @@ var headerList = ['h2', 'h3', 'h4'];
 
 try {
     var readMe = fs.readFileSync('demo.md', 'utf8')
-    console.log(data)
   } catch (err) {
     console.error(err)
 }
@@ -37,7 +38,8 @@ for(i = 0; i < rootChildren.length; i++)
 {
   var tagName = rootChildren[i].tagName;
 
-  if (rootChildren[i].tagName == "h4" || rootChildren[i].tagName == "h3")
+  //If tag is within our headerlist
+  if (headerList.indexOf(tagName) >=0)
   {
     jsonString+= "\n Label: " + rootChildren[i].innerHTML; 
     itemNum = i.toString();
@@ -71,5 +73,6 @@ for(i = 0; i < rootChildren.length; i++)
   }
 }
 
+console.log("MarkDown Parsing Finished...");
 //Markdown Items placed into list of objects
-console.log(itemList);
+console.log("Number of Headers Parsed: " + itemList.length);

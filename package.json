@@ -9,6 +9,9 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "bin": {
+    "index": "index.js"
+  },
   "dependencies": {
     "markdown-it": "^10.0.0",
     "node-html-parser": "^1.2.16"
