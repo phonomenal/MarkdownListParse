@@ -117,7 +117,9 @@ async function myAsyncMethod () {
     repo,
     title: "My test issue",
   });
+
+  console.log("Issue created: %d", data.html_url);
 }
-console.log("Issue created: %d", data.html_url);
+
 
 console.log('New Issue created!')
