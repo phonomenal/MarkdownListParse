@@ -108,28 +108,23 @@ for(i = 0; i < itemList.length; i++)
 const octokit = new Octokit();
 const [owner, repo] = process.env.GITHUB_REPOSITORY.split("/");
 
-try {
-  myAsyncMethodIssue()
 
-  async function myAsyncMethodIssue () {
-  // See https://developer.github.com/v3/issues/#create-an-issue
-    const { data } = await octokit.request("POST /repos/:owner/:repo/issues", {
-      owner,
-      repo,
-      title: "My test issue",
-    });
+(async function () {
+  await myAsyncMethodIssue().catch((e) => { console.error(e); process.exit(1) })
+  console.log('This will not be printed.');
+  })()
 
-    console.log("Issue created: %d", data.html_url);
-  }
-  
-} catch (error) {
+async function myAsyncMethodIssue () {
+// See https://developer.github.com/v3/issues/#create-an-issue
+  const { data } = await octokit.request("POST /repos/:owner/:repo/issues", {
+    owner,
+    repo,
+    title: "My test from async catch",
+  });
 
-  console.log('Issue not creating. Error: ' + error.toString());
-
+  console.log("Issue created: %d", data.html_url);
 }
 
-
-//myAsyncMethodLabel()
 
 (async function () {
   await myAsyncMethodLabel().catch((e) => { console.error(e); process.exit(1) })
