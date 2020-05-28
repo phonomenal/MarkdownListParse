@@ -121,5 +121,19 @@ async function myAsyncMethod () {
   console.log("Issue created: %d", data.html_url);
 }
 
+async function myAsyncMethod () {
+  // See https://developer.github.com/v3/issues/#create-an-issue
+    const { data } = await octokit.request("POST /repos/:owner/:repo/labels", {
+      owner,
+      repo,
+      name: "bug",
+      description: "Something isn't working",
+      color: "f29513"
+    });
+  
+    console.log("Issue created: %d", data.html_url);
+  }
 
-console.log('New Issue created!')
+
+
+console.log('New Issue and Label created!');
