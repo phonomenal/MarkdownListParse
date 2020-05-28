@@ -70,10 +70,17 @@ for(i = 0; i < rootChildren.length; i++)
     }
   }
 }
+console.log(" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+console.log("| ...MarkDown Parsing Finished... |");
+console.log(" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+console.log("");
 
-console.log("MarkDown Parsing Finished...");
 //Markdown Items placed into list of objects
-console.log("Number of Headers Parsed: " + itemList.length);6
+console.log("Number of tag sets Parsed: " + itemList.length);
+console.log("----------------------------");
+console.log("");
+
+
 
 for(i = 0; i < itemList.length; i++)
 {
