@@ -5,7 +5,7 @@ inputs:
     description: 'Mark down file to parse'
     required: true
     default: 'file.md'
-  repo-token:
+  GITHUB_TOKEN:
     required: true
     description: The token provided by GitHub actions via secrets.GITHUB_TOKEN
 outputs:
