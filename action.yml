@@ -4,7 +4,10 @@ inputs:
   markdown-file:  # id of input
     description: 'Mark down file to parse'
     required: true
-    default: 'demo.md'
+    default: 'file.md'
+  repo-token:
+    required: true
+    description: The token provided by GitHub actions via secrets.GITHUB_TOKEN
 outputs:
   time: # id of output
     description: 'The time we greeted you'

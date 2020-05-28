@@ -39,7 +39,6 @@ for (var i = rootChildren.length - 1; i >= 0; --i) {
     }
 }
 
-
 var itemList = [];
 
 var headerJson = {};  
@@ -103,3 +102,23 @@ for(i = 0; i < itemList.length; i++)
 
   }
 }
+
+const githubToken = core.getInput('repo-token');
+
+var client = github.client(githubToken);
+
+client.get('/user', {}, function (err, status, body, headers) {
+  console.log(body); //json object
+})
+
+var ghrepo = client.repo('/James-LeHa/MarkdownListParse');
+
+ghrepo.issue({
+  "title": "Found a bug",
+  "body": "I'm having a problem with this.",
+  "assignee": "octocat",
+  "milestone": 1,
+  "labels": ["Label1", "Label2"]
+}, callback); //issue
+
+console.log('New Issue created!')
