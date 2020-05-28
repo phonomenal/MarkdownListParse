@@ -128,22 +128,27 @@ try {
 
 }
 
+try {
 
-myAsyncMethodLabel()
+  myAsyncMethodLabel()
 
-async function myAsyncMethodLabel () {
-  // See https://developer.github.com/v3/issues/#create-an-issue
-    const { data } = await octokit.request("POST /repos/:owner/:repo/labels", {
-      owner,
-      repo,
-      name: "testLabel",
-      description: "Something isn't working",
-      color: "f29883"
-    });
-  
-    console.log("Issue created: %d", data.html_url);
+  async function myAsyncMethodLabel () {
+    // See https://developer.github.com/v3/issues/#create-an-issue
+      const { data } = await octokit.request("POST /repos/:owner/:repo/labels", {
+        owner,
+        repo,
+        name: "testLabel",
+        description: "Something isn't working",
+        color: "f29883"
+      });
+    
+      console.log("Issue created: %d", data.html_url);
+  }
+} catch (error) {
+
+  console.log('Label not creating. Error: ' + error.toString());
+
 }
-
 
 
 console.log('New Issue and Label created!');
