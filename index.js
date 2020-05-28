@@ -3,7 +3,7 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
 
-var github = require('octonode');
+var githubWrapper = require('octonode');
 
 const HTMLParser = require('node-html-parser');
 
@@ -107,7 +107,7 @@ for(i = 0; i < itemList.length; i++)
 
 const githubToken = core.getInput('repo-token');
 
-var client = github.client(githubToken);
+var client = githubWrapper.client(githubToken);
 
 client.get('/user', {}, function (err, status, body, headers) {
   console.log(body); //json object
