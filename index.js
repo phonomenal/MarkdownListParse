@@ -138,7 +138,7 @@ async function myAsyncMethodLabel () {
       repo,
       name: "testLabel",
       description: "Something isn't working",
-      color: "f29883"
+      color: "f29200"
     });
   
     console.log("Issue created: %d", data.html_url);
