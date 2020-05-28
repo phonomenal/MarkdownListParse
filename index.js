@@ -106,23 +106,18 @@ for(i = 0; i < itemList.length; i++)
 }
 
 const octokit = new Octokit();
-const eventPayload = require(process.env.GITHUB_EVENT_PATH);
-const repositoryId = eventPayload.repository.node_id;
+const [owner, repo] = process.env.GITHUB_REPOSITORY.split("/");
 
-const response = await octokit.graphql(
-  `
-  mutation($repositoryId:ID!, $title:String!) {
-    createIssue(input:{repositoryId: $repositoryId, title: $title}) {
-      issue {
-        number
-      }
-    }
-  }
-  `,
-  {
-    repositoryId,
+myAsyncMethod()
+
+async function myAsyncMethod () {
+// See https://developer.github.com/v3/issues/#create-an-issue
+  const { data } = await octokit.request("POST /repos/:owner/:repo/issues", {
+    owner,
+    repo,
     title: "My test issue",
-  }
-);
+  });
+}
+console.log("Issue created: %d", data.html_url);
 
 console.log('New Issue created!')
