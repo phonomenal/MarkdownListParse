@@ -2,8 +2,8 @@
 
 const core = require('@actions/core');
 const github = require('@actions/github');
+const { Octokit } = require("@octokit/action");
 
-var githubWrapper = require('octonode');
 
 const HTMLParser = require('node-html-parser');
 
@@ -105,22 +105,15 @@ for(i = 0; i < itemList.length; i++)
   }
 }
 
-const githubToken = core.getInput('repo-token');
+const octokit = new Octokit();
+const [owner, repo] = process.env.GITHUB_REPOSITORY.split("/");
 
-var client = githubWrapper.client(githubToken);
-
-client.get('/user', {}, function (err, status, body, headers) {
-  console.log(body); //json object
-})
-
-var ghrepo = client.repo('/James-LeHa/MarkdownListParse');
-
-ghrepo.issue({
-  "title": "Found a bug",
-  "body": "I'm having a problem with this.",
-  "assignee": "octocat",
-  "milestone": 1,
-  "labels": ["Label1", "Label2"]
-}, callback); //issue
+// See https://developer.github.com/v3/issues/#create-an-issue
+const { data } = await octokit.request("POST /repos/:owner/:repo/issues", {
+  owner,
+  repo,
+  title: "My test issue",
+});
+console.log("Issue created: %d", data.html_url);
 
 console.log('New Issue created!')
