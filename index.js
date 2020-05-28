@@ -3,6 +3,8 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
 
+var github = require('octonode');
+
 const HTMLParser = require('node-html-parser');
 
 const fs = require('fs');
