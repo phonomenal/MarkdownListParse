@@ -1,5 +1,8 @@
 #! /usr/bin/env node
 
+const core = require('@actions/core');
+const github = require('@actions/github');
+
 const HTMLParser = require('node-html-parser');
 
 const fs = require('fs');
