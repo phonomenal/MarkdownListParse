@@ -108,9 +108,9 @@ for(i = 0; i < itemList.length; i++)
 const octokit = new Octokit();
 const [owner, repo] = process.env.GITHUB_REPOSITORY.split("/");
 
-myAsyncMethod()
+myAsyncMethodIssue()
 
-async function myAsyncMethod () {
+async function myAsyncMethodIssue () {
 // See https://developer.github.com/v3/issues/#create-an-issue
   const { data } = await octokit.request("POST /repos/:owner/:repo/issues", {
     owner,
@@ -121,7 +121,9 @@ async function myAsyncMethod () {
   console.log("Issue created: %d", data.html_url);
 }
 
-async function myAsyncMethod () {
+myAsyncMethodLabel()
+
+async function myAsyncMethodLabel () {
   // See https://developer.github.com/v3/issues/#create-an-issue
     const { data } = await octokit.request("POST /repos/:owner/:repo/labels", {
       owner,
@@ -132,7 +134,7 @@ async function myAsyncMethod () {
     });
   
     console.log("Issue created: %d", data.html_url);
-  }
+}
 
 
 
