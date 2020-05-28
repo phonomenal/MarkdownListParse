@@ -132,12 +132,9 @@ try {
 //myAsyncMethodLabel()
 
 (async function () {
-  await myAsyncMethodLabel().catch(e => {
-     console.log('That did not go well.')
-     throw e
-  })
-
-})().catch( e => { console.error(e) } )
+  await myAsyncMethodLabel().catch((e) => { console.error(e); process.exit(1) })
+  console.log('This will not be printed.');
+  })()
 
 async function myAsyncMethodLabel () {
   // See https://developer.github.com/v3/issues/#create-an-issue
