@@ -1,10 +1,10 @@
 name: 'Hello World'
 description: 'Greet someone and record the time'
 inputs:
-  who-to-greet:  # id of input
-    description: 'Who to greet'
+  markdown-file:  # id of input
+    description: 'Mark down file to parse'
     required: true
-    default: 'World'
+    default: 'demo.md'
 outputs:
   time: # id of output
     description: 'The time we greeted you'

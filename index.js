@@ -7,11 +7,19 @@ const HTMLParser = require('node-html-parser');
 
 const fs = require('fs');
 
+//inputs
+//Set of header titles to use for issue and label creation
+var headersToUse = ['Security']; 
+
+const mdFileName = core.getInput('markdown-file');
+//var mdFileName = 'demo.md';
+
 var headerTypes = ['h2', 'h3', 'h4'];
 var listTypes = ['ol', 'ul'];
 
+
 try {
-    var readMe = fs.readFileSync('demo.md', 'utf8')
+    var readMe = fs.readFileSync(mdFileName, 'utf8')
   } catch (err) {
     console.error(err)
 }
