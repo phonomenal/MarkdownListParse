@@ -136,9 +136,9 @@ async function myAsyncMethodLabel () {
     const { data } = await octokit.request("POST /repos/:owner/:repo/labels", {
       owner,
       repo,
-      name: "bug",
+      name: "testLabel",
       description: "Something isn't working",
-      color: "f29513"
+      color: "f29883"
     });
   
     console.log("Issue created: %d", data.html_url);
