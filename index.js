@@ -57,7 +57,7 @@ for(i = 0; i < rootChildren.length; i++)
     headerJson['label'] = rootChildren[i].innerHTML;
   }
   //Parse through items inside <ol> tag
-  else if(headerTypes.indexOf(tagName) != 0 && listTypes.indexOf(tagName) >= 0)
+  else if(headerTypes.indexOf(tagName) != 0)
   {
     var childList = rootChildren[i].childNodes;
 
@@ -92,8 +92,6 @@ console.log("Number of tag sets Parsed: " + itemList.length);
 console.log("----------------------------");
 console.log("");
 
-
-
 for(i = 0; i < itemList.length; i++)
 {
   console.log(itemList[i].label);
@@ -108,23 +106,41 @@ for(i = 0; i < itemList.length; i++)
 const octokit = new Octokit();
 const [owner, repo] = process.env.GITHUB_REPOSITORY.split("/");
 
+//Iterate and create issues for header titles inputted
+for(i = 0; i < itemList.length; i++)
+{
+  if(headersToUse.indexOf(itemList[i].label) >= 0)
+  {
+    for (j= 0; j < itemList[i].children.length; j++)
+    {
+      listItemValue = itemList[i].children[j].item;
 
-(async function () {
-  await myAsyncMethodIssue().catch((e) => { console.error(e); process.exit(1) })
-  console.log('This will not be printed.');
-  })()
+      (async function () {
+        await myAsyncMethodIssue(listItemValue).catch((e) => { console.error(e); process.exit(1) })
+        console.log('This will not be printed.');
+        })()
+      console.log("Issue created for: " + listItemValue)
+  
+    }
+  }
 
-async function myAsyncMethodIssue () {
+}
+
+
+async function myAsyncMethodIssue (titleText) {
 // See https://developer.github.com/v3/issues/#create-an-issue
   const { data } = await octokit.request("POST /repos/:owner/:repo/issues", {
     owner,
     repo,
     title: "My test from async catch",
+    body: ""
   });
 
   console.log("Issue created: %d", data.html_url);
 }
 
+
+/* TO-DO: smart label creation 
 
 (async function () {
   await myAsyncMethodLabel().catch((e) => { console.error(e); process.exit(1) })
@@ -144,6 +160,7 @@ async function myAsyncMethodLabel () {
     console.log("Issue created: %d", data.html_url);
 }
 
+*/
 
 
 console.log('New Issue and Label created!');
