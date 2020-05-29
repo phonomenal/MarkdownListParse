@@ -116,7 +116,18 @@ for(i = 0; i < itemList.length; i++)
     var headerNameValue = itemList[i].label;
 
     (async function () {
-      await myAsyncMethodLabel(headerNameValue).catch((e) => { console.log(e +"code-> " + e.status); })
+      await myAsyncMethodLabel(headerNameValue).catch((e) => 
+      { 
+        if(e.status === 422)
+        {
+          console.log(`Label already exists, Error Status: ${e.status}`); 
+        }
+        else
+        {
+          console.error(e);
+          process.exit(1);
+        }
+      });
       console.log('This will not be printed.');
       })()
 
