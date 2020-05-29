@@ -136,10 +136,8 @@ async function myAsyncMethodIssue (titleText) {
     owner,
     repo,
     title: titleText,
-    body: ""
+    body: "Issue created from .md file found [here](https://github.com/${process.env.GITHUB_REPOSITORY}/blob/master/${mdFileName})"
   });
-
-  console.log("Issue created: %d", data.html_url);
 }
 
 
@@ -164,6 +162,3 @@ async function myAsyncMethodLabel () {
 }
 
 */
-
-
-console.log('New Issue and Label created!');
