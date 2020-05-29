@@ -105,6 +105,9 @@ for(i = 0; i < itemList.length; i++)
   }
 }
 
+console.log("----------------------------");
+console.log("");
+
 const octokit = new Octokit();
 const [owner, repo] = process.env.GITHUB_REPOSITORY.split("/");
 
@@ -117,21 +120,18 @@ for(i = 0; i < itemList.length; i++)
 
     (async function () {
       await myAsyncMethodLabel(headerNameValue).catch((e) => 
-      { 
-        if(e.status === 422)
-        {
-          console.log(`Label already exists, Error Status: ${e.status}`); 
-        }
-        else
-        {
-          console.error(e);
-          process.exit(1);
-        }
-      });
-      console.log('This will not be printed.');
+        { 
+          if(e.status === 422)
+          {
+            console.log(`Label already exists, Error Status: ${e.status}`); 
+          }
+          else
+          {
+            console.error(e);
+            process.exit(1);
+          }
+        });
       })()
-
-      console.log('Label created for: ' + headerNameValue);
 
     for (j= 0; j < itemList[i].children.length; j++)
     {
@@ -170,9 +170,7 @@ async function myAsyncMethodLabel (headerNameValue) {
       description: "Create from GH Action",
       color: randomColor
     });
-  
-    console.log("Issue created: %d", data.html_url);
-}
+  }
 
 
 function RandomColorHex(){
