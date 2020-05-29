@@ -11,12 +11,14 @@ const fs = require('fs');
 
 //inputs
 //Set of header titles to use for issue and label creation
-var headersToUse = ['Security']; 
+var headerStringInput = 'Security,B. CI,D. DevOps'; 
+
+var headersToUse = headerStringInput.split(',');
 
 const mdFileName = core.getInput('markdown-file');
 //var mdFileName = 'demo.md';
 
-var headerTypes = ['h2', 'h3', 'h4'];
+var headerTypes = ['h2', 'h3', 'h4']; 
 var listTypes = ['ol', 'ul'];
 
 
