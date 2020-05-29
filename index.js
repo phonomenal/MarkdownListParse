@@ -114,17 +114,20 @@ for(i = 0; i < itemList.length; i++)
   if(headersToUse.indexOf(itemList[i].label) >= 0)
   {
     var headerNameValue = itemList[i].label;
+
     (async function () {
       await myAsyncMethodLabel(headerNameValue).catch((e) => { console.error(e); process.exit(1) })
       console.log('This will not be printed.');
       })()
+
+      console.log('Label created for: ' + headerNameValue);
 
     for (j= 0; j < itemList[i].children.length; j++)
     {
       listItemValue = itemList[i].children[j].item;
 
       (async function () {
-        await myAsyncMethodIssue(listItemValue).catch((e) => 
+        await myAsyncMethodIssue(listItemValue, headerNameValue).catch((e) => 
         { console.error(e); process.exit(1) });
         })()
       console.log("Issue created for: " + listItemValue)
@@ -135,13 +138,14 @@ for(i = 0; i < itemList.length; i++)
 }
 
 
-async function myAsyncMethodIssue (titleText) {
+async function myAsyncMethodIssue (titleText, relatedLabel) {
 // See https://developer.github.com/v3/issues/#create-an-issue
   const { data } = await octokit.request("POST /repos/:owner/:repo/issues", {
     owner,
     repo,
     title: titleText,
-    body: `Issue created from .md file found [here](https://github.com/${process.env.GITHUB_REPOSITORY}/blob/master/${mdFileName})`
+    body: `Issue created from .md file found [here](https://github.com/${process.env.GITHUB_REPOSITORY}/blob/master/${mdFileName})`,
+    labels: [relatedLabel]
   });
 }
 
@@ -165,6 +169,4 @@ function RandomColorHex(){
   console.log(`Using label color ${randomColor}`);
   return randomColor.toString();
 }
-
-  RandomColorHex();
 
