@@ -136,7 +136,7 @@ async function myAsyncMethodIssue (titleText) {
     owner,
     repo,
     title: titleText,
-    body: "Issue created from .md file found [here](https://github.com/${process.env.GITHUB_REPOSITORY}/blob/master/${mdFileName})"
+    body: `Issue created from .md file found [here](https://github.com/${process.env.GITHUB_REPOSITORY}/blob/master/${mdFileName})`
   });
 }
 
