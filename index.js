@@ -116,7 +116,7 @@ for(i = 0; i < itemList.length; i++)
     var headerNameValue = itemList[i].label;
 
     (async function () {
-      await myAsyncMethodLabel(headerNameValue).catch((e) => { console.error(e); process.exit(1) })
+      await myAsyncMethodLabel(headerNameValue).catch((e) => { console.log(e); })
       console.log('This will not be printed.');
       })()
 
