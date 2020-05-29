@@ -120,8 +120,8 @@ for(i = 0; i < itemList.length; i++)
       listItemValue = itemList[i].children[j].item;
 
       (async function () {
-        await myAsyncMethodIssue(listItemValue).catch((e) => { console.error(e); process.exit(1) })
-        console.log('This will not be printed.');
+        await myAsyncMethodIssue(listItemValue).catch((e) => 
+        { console.error(e); process.exit(1) });
         })()
       console.log("Issue created for: " + listItemValue)
   
@@ -178,7 +178,7 @@ function RandomColorHex(){
 
 
 async function AsyncGetLabels () {
-    const labels = await octokit.paginate("GET /repos/:owner/:repo/labels");
+    const labels = await octokit.request("GET /repos/:owner/:repo/labels");
     console.log(labels);
   }
 
