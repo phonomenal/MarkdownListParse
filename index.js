@@ -11,7 +11,8 @@ const fs = require('fs');
 
 //inputs
 //Set of header titles to use for issue and label creation
-var headerStringInput = 'Security,B. CI,D. DevOps'; 
+const headerStringInput = core.getInput('HeadersToParse');
+//var headerStringInput = 'Security,B. CI,D. DevOps'; 
 
 var headersToUse = headerStringInput.split(',');
 
