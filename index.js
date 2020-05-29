@@ -6,7 +6,6 @@ const { Octokit } = require("@octokit/action");
 
 
 const HTMLParser = require('node-html-parser');
-
 const fs = require('fs');
 
 //inputs
@@ -167,13 +166,9 @@ async function myAsyncMethodLabel () {
 */
 
 function RandomColorHex(){
-  const setBg = () => {
-    const randomColor = Math.floor(Math.random()*16777215).toString(16);
-    document.body.style.backgroundColor = "#" + randomColor;
-    color.innerHTML = "#" + randomColor;
-  }
-  console.log(`Using label color ${setBg}`);
-  return setBg;
+  var randomColor = Math.floor(Math.random()*16777215).toString(16);
+  console.log(`Using label color ${randomColor}`);
+  return randomColor;
 }
 
 
@@ -184,4 +179,7 @@ async function AsyncGetLabels () {
 
   RandomColorHex();
 
-  AsyncGetLabels();
+  (async function () {
+    await AsyncGetLabels().catch((e) => 
+    { console.error(e); process.exit(1) });
+    })()
