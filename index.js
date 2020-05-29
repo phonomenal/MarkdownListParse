@@ -114,6 +114,7 @@ for(i = 0; i < itemList.length; i++)
 {
   if(headersToUse.indexOf(itemList[i].label) >= 0)
   {
+
     for (j= 0; j < itemList[i].children.length; j++)
     {
       listItemValue = itemList[i].children[j].item;
@@ -148,6 +149,8 @@ async function myAsyncMethodIssue (titleText) {
   console.log('This will not be printed.');
   })()
 
+
+
 async function myAsyncMethodLabel () {
   // See https://developer.github.com/v3/issues/#create-an-issue
     const { data } = await octokit.request("POST /repos/:owner/:repo/labels", {
@@ -162,3 +165,23 @@ async function myAsyncMethodLabel () {
 }
 
 */
+
+function RandomColorHex(){
+  const setBg = () => {
+    const randomColor = Math.floor(Math.random()*16777215).toString(16);
+    document.body.style.backgroundColor = "#" + randomColor;
+    color.innerHTML = "#" + randomColor;
+  }
+  console.log(`Using label color ${setBg}`);
+  return setBg;
+}
+
+
+async function AsyncGetLabels () {
+    const labels = await octokit.paginate("GET /repos/:owner/:repo/labels");
+    console.log(labels);
+  }
+
+  RandomColorHex();
+
+  AsyncGetLabels();

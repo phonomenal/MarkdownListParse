@@ -2,7 +2,7 @@ name: 'Hello World'
 description: 'Greet someone and record the time'
 inputs:
   markdown-file:  # id of input
-    description: 'Mark down file to parse'
+    description: 'Mark down file to parse, located at repo root'
     required: true
     default: 'file.md'
   GITHUB_TOKEN:
