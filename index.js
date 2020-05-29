@@ -113,6 +113,11 @@ for(i = 0; i < itemList.length; i++)
 {
   if(headersToUse.indexOf(itemList[i].label) >= 0)
   {
+    var headerNameValue = itemList[i].label;
+    (async function () {
+      await myAsyncMethodLabel(headerNameValue).catch((e) => { console.error(e); process.exit(1) })
+      console.log('This will not be printed.');
+      })()
 
     for (j= 0; j < itemList[i].children.length; j++)
     {
@@ -140,46 +145,26 @@ async function myAsyncMethodIssue (titleText) {
   });
 }
 
-
-/* TO-DO: smart label creation 
-
-(async function () {
-  await myAsyncMethodLabel().catch((e) => { console.error(e); process.exit(1) })
-  console.log('This will not be printed.');
-  })()
-
-
-
-async function myAsyncMethodLabel () {
+async function myAsyncMethodLabel (headerNameValue) {
   // See https://developer.github.com/v3/issues/#create-an-issue
+    var randomColor = RandomColorHex();
     const { data } = await octokit.request("POST /repos/:owner/:repo/labels", {
       owner,
       repo,
-      name: "label test async",
-      description: "Something isn't working",
-      color: "f29200"
+      name: headerNameValue,
+      description: "Create from GH Action",
+      color: randomColor
     });
   
     console.log("Issue created: %d", data.html_url);
 }
 
-*/
 
 function RandomColorHex(){
   var randomColor = Math.floor(Math.random()*16777215).toString(16);
   console.log(`Using label color ${randomColor}`);
-  return randomColor;
+  return randomColor.toString();
 }
-
-
-async function AsyncGetLabels () {
-    const labels = await octokit.request("GET /repos/:owner/:repo/labels");
-    console.log(labels);
-  }
 
   RandomColorHex();
 
-  (async function () {
-    await AsyncGetLabels().catch((e) => 
-    { console.error(e); process.exit(1) });
-    })()
