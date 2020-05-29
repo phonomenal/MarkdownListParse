@@ -132,7 +132,7 @@ async function myAsyncMethodIssue (titleText) {
   const { data } = await octokit.request("POST /repos/:owner/:repo/issues", {
     owner,
     repo,
-    title: "My test from async catch",
+    title: titleText,
     body: ""
   });
 
